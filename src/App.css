@@ -47,7 +47,7 @@ body{
 .nav-items{
     color: #134E6F;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 23px;
     cursor: pointer;
 }
 
@@ -199,6 +199,36 @@ body{
 .count-inner{
     color: #134d6f6b;
 }
+
+.navbar-active{
+    color: #FFA822 !important;
+    outline: none !important;
+    border: none !important;
+}
+
+
+/* Responsiveness Starts From Here */
+/* for register */
+
+@media (max-width : 768px){
+    .nav-outer{
+        display: none;
+    }
+
+    .contact{
+        width: 60% !important;
+    }
+
+    .contact h1{
+        font-size: 26px;
+    }
+
+    .contact label{
+        font-size: 22px;
+    }
+
+}
+
 
 
 
