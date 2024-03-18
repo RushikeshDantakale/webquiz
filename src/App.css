@@ -211,8 +211,14 @@ body{
 /* for register */
 
 @media (max-width : 768px){
+
+    .logo{
+        padding-left: 15px;
+    }
+
     .nav-outer{
         display: none;
+        padding-right: 15px;
     }
 
     .contact{
