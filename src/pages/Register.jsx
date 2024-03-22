@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import { useNavigate } from 'react-router-dom';
+import {Helmet} from 'react-helmet';
 
 export default function Register() {
+
+
     const [email , setEmail] = useState(null)
     const navigate =useNavigate();
 
@@ -18,6 +21,9 @@ export default function Register() {
 
     }
   return (<>
+      <Helmet>
+        <title>Register Page - ReactQuiz</title>
+      </Helmet>
   <Navbar sub={"home"}/>
     <div className='w-100 flex  mt-4 j-center contact-outer'>
         <div className='w-50 contact bg-white'>

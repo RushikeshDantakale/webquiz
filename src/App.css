@@ -16,6 +16,7 @@ body{
     font-family:"Poppins", sans-serif;
 }
 .navbar{
+    position: relative;
     background-color:whitesmoke;
     height: 5rem;
     display: flex;
@@ -206,6 +207,23 @@ body{
     border: none !important;
 }
 
+.menu{
+    display: none;
+    font-size: 35px;
+    margin-right: 20px;
+}
+
+.after-menu{
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background-color: whitesmoke;
+    padding:20px 0px; 
+}
+
+.after-menu .nav-items{
+    text-align: center;
+}
 
 /* Responsiveness Starts From Here */
 /* for register */
@@ -232,6 +250,12 @@ body{
     .contact label{
         font-size: 22px;
     }
+
+    .menu{
+        display: block;
+    }
+
+    
 
 }
 
