@@ -225,7 +225,120 @@ body{
     text-align: center;
 }
 
+.home-container{
+    display: flex;
+    background-color: whitesmoke;
+    height:calc(100vh - 5rem);
+
+}
+
+.home-left{
+    flex: 1;
+}
+
+.home-left .inner{
+    height: fit-content;
+    margin: 6rem 80px;
+}
+
+.home-right{
+    flex: 1;
+}
+
+
+.right-img{
+    height: 90%;
+    width: 90%;
+}
+
+
+.home-left .title{
+    font-size: 50px;
+    font-weight: 700;
+
+}
+
+.home-left .description{
+    font-size: 30px;
+    font-weight: 400;
+    margin:2rem 0;
+}
+
+.home-left button{
+    font-size:40px;
+    font-weight: 600;
+    background-color:#FFA822;
+    color: whitesmoke;
+    border: none;
+    padding:10px 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, outline 0.3s ease-in-out;
+
+}
+
+.home-left button:hover{
+    outline: 2px solid #aa6d11;
+    transform: rotate(10deg);
+}
+
+
+
+
+
 /* Responsiveness Starts From Here */
+/* for home page */
+@media (max-width : 1030px){
+
+    .home-left{
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .home-left .inner{
+        height: fit-content;
+        margin: 0rem 20px;
+    }
+
+    .home-left .title{
+        font-size: 30px;
+        font-weight: 700;
+    
+    }
+    
+    .home-left .description{
+        font-size: 20px;
+        font-weight: 400;
+        margin:2rem 0;
+    }
+    
+    .home-left button{
+        font-size:20px;
+        font-weight: 600;
+        background-color:#FFA822;
+        color: whitesmoke;
+        border: none;
+        padding:10px 20px;
+    
+    }
+}
+
+
+@media (max-width : 768px){
+    .home-container{
+        display: block;
+        height: 100%;
+    }
+}
+
+
+
+
+
+
+
+
 /* for register */
 
 @media (max-width : 768px){
@@ -258,7 +371,6 @@ body{
     
 
 }
-
 
 
 
