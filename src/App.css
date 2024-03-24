@@ -480,5 +480,24 @@ body{
 }
 
 
+@media(max-width:768px){
+    .contact_us-container .right{
+        display: none;
+    }
+
+    .contact_us-container .left .inner .heading{
+        font-size: 30px;
+    } 
+    .contact_us-container .left .inner .desc{
+        font-size: 26px;
+    } 
+
+    .contact_us-container .left .inner button{
+        font-size: 23px;
+        font-weight: 700;
+    }
+}
+
+
 
 
