@@ -483,6 +483,7 @@ body{
 @media(max-width:768px){
     .contact_us-container .right{
         display: none;
+        height: fit-content;
     }
 
     .contact_us-container .left .inner .heading{
