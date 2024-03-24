@@ -17,7 +17,7 @@ export default function Register() {
     const sendEmail = (e) =>{
         e.preventDefault()
         console.log(email , 11)
-        // navigate("/user/quiz")
+        navigate("/user/quiz")
 
     }
   return (<>

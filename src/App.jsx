@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'
 import Home from './pages/Home';
 import Quiz from './pages/Quiz';
-import Login from './pages/Login';
+import Login from './pages/admin/Login';
 import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import Contact from "./pages/Contact";
@@ -25,6 +25,7 @@ function App() {
 
     {/* Routes for admins */}
     <Route path='/admin/dashboard' element=<Dashboard/> />
+    <Route path='/admin/login' element=<Login/> />
 
     
   </Routes>

@@ -25,9 +25,9 @@ export default function Home() {
         We help you prepare for exams and quizes !
         </div>
         <Link to="/user/register">
-        <button>
-          Start Solving
-        </button>
+          <button>
+            Start Solving
+          </button>
         </Link>
 
         </div>

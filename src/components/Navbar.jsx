@@ -24,6 +24,9 @@ export default function Navbar({sub}) {
             <NavLink to="/user/register">
               <div className={`nav-items ${pathname == "/user/register" ? "navbar-active" : ""}`}>Register & Go!</div>
             </NavLink>
+            <NavLink to="/admin/login">
+              <div className={`nav-items ${pathname == "/admin/login" ? "navbar-active" : ""}`}>Admin Login</div>
+            </NavLink>
        </div>
         </>
         :<>
@@ -50,6 +53,9 @@ export default function Navbar({sub}) {
             </NavLink>
             <NavLink to="/user/register">
               <div className={`nav-items ${pathname == "/user/register" ? "navbar-active" : ""}`}>Register & Go!</div>
+            </NavLink>
+            <NavLink to="/admin/login">
+              <div className={`nav-items ${pathname == "/admin/login" ? "navbar-active" : ""}`}>Admin Login</div>
             </NavLink>
        </div>: null}
     </div>
