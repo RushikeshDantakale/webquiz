@@ -481,6 +481,10 @@ body{
 
 
 @media(max-width:768px){
+
+    .contact_us-container  .left .inner{
+        width: 84%;
+      }
     .contact_us-container .right{
         display: none;
         height: fit-content;
