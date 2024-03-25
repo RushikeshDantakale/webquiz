@@ -358,28 +358,38 @@ body{
 
 
 .login{
-    padding: 20px 40px;
+    padding: 40px 20px;
     height: fit-content;
     margin-top: 50px;
 }
+
+.login h1{
+    color: #134E6F;
+    font-weight: 500;
+    font-size: 38px;
+}
+
+.login p{
+    color: #FFA822;
+    font-weight: 600;
+}
+
 .login input{
-    width: 100%;
-    padding: 10px 5px;
+    width: 90%;
+    padding: 10px 15px;
     font-size: 22px;
     margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
 }
 
 .login input:focus{
-    outline: 2px solid rgb(196, 196, 196);
-}
-
-.login h1{
-    font-size: 38px;
+    outline: 2px solid rgb(230, 230, 230);
 }
 
 
 .login button{
-    width: 104%;
+    width: 98%;
     font-size: 32px;
     font-size: 30px;
     font-weight: 600;
@@ -387,9 +397,15 @@ body{
     background-color: #FFA822;
     border: none;
     padding: 5px 15px;
+    transition: all ease-in-out 0.3sec;
+    border-radius: 5px;
 }
 
-
+.login button:hover{
+    outline: 2px solid #f2d2a2;
+    color: #FFA822;
+    background-color: #ffeaca;
+}
 
 
 /* Responsiveness Starts From Here */
