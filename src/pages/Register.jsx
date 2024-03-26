@@ -22,7 +22,7 @@ export default function Register() {
     }
   return (<>
       <Helmet>
-        <title>Register Page - ReactQuiz</title>
+        <title>ReactQuiz - Register</title>
       </Helmet>
   <Navbar sub={"home"}/>
     <div className='w-100 flex  mt-4 j-center contact-outer'>

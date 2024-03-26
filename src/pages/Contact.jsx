@@ -1,9 +1,14 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
+import { Link, useLocation } from 'react-router-dom'
+import { Helmet } from 'react-helmet';
 
 export default function Contact() {
   return (
     <>
+    <Helmet>
+      <title>ReactQuiz - Contact Us</title>
+    </Helmet>
         <Navbar sub={'home'}/>
         <div className="contact_us-container">
             <div className="left">
