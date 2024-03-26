@@ -14,17 +14,17 @@ export default function Navbar({sub}) {
         ? <>
           {open ? <RxCross1 className='menu' onClick={() => {setOpen(!open)}}/> :<GiHamburgerMenu className='menu' onClick={() => {setOpen(!open)}}/>
 }        <div className='nav-outer'>
-            <NavLink to="/">
+            <NavLink className="no-underline" to="/">
               <div className={`nav-items ${pathname == "/" ? "navbar-active" : ""}`}>Home</div>
             </NavLink>
 
-            <NavLink to="/user/contact">
+            <NavLink className="no-underline" to="/user/contact">
               <div className={`nav-items ${pathname == "/user/contact" ? "navbar-active" : ""}`}>Contact Us</div>
             </NavLink>
-            <NavLink to="/user/register">
+            <NavLink className="no-underline" to="/user/register">
               <div className={`nav-items ${pathname == "/user/register" ? "navbar-active" : ""}`}>Register & Go!</div>
             </NavLink>
-            <NavLink to="/admin/login">
+            <NavLink className="no-underline" to="/admin/login">
               <div className={`nav-items ${pathname == "/admin/login" ? "navbar-active" : ""}`}>Admin Login</div>
             </NavLink>
        </div>
