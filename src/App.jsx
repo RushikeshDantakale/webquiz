@@ -7,6 +7,9 @@ import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/admin/Dashboard";
+import Users from "./pages/admin/Users";
+import Questions from "./pages/admin/Questions";
+import Reports from "./pages/admin/Reports";
 
 function App() {
 
@@ -25,6 +28,9 @@ function App() {
 
     {/* Routes for admins */}
     <Route path='/admin/dashboard' element=<Dashboard/> />
+    <Route path='/admin/users' element=<Users/> />
+    <Route path='/admin/questions' element=<Questions/> />
+    <Route path='/admin/reports' element=<Reports/> />
     <Route path='/admin/login' element=<Login/> />
 
     

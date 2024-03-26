@@ -12,6 +12,10 @@ body {
     color: #1AC0C6;
 }
 
+.no-underline {
+  text-decoration: none;
+}
+
 .logo-inner{
     color: #FFA822;
 }
@@ -26,6 +30,7 @@ body {
     line-height: 1px;
     font-size: 26px;
     color: #ff6d00;
+    color: #dadada;
   }
   .icon, .icon_header {
     margin-right: 5px;
@@ -60,7 +65,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 30px 0 30px;
+    padding: 5px 30px 5px 30px;
     box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
   }
   
@@ -73,6 +78,16 @@ body {
     color: black;
     padding: 4px 10px;
     border-radius: 5px;
+  }
+
+  .header-right span{
+    font-weight: 700;
+    font-size: 20px;
+  }
+  
+  .profile-icon{
+    font-size: 35px;
+    cursor: pointer;
   }
 
   .header-left input{
@@ -157,13 +172,19 @@ body {
   /* Main  */  
   .main-container {
     grid-area: main;
-    overflow-y: auto;
+    overflow-y: scroll;
     padding: 20px 20px;
-    color: rgba(255, 255, 255, 0.95);
+    color: rgba(34, 34, 34, 0.95);
     background-color: #DEE0E6;
+  }
+
+  .main-content{
+    background-color: whitesmoke;
+    padding: 20px 40px;
   }
   
   .main-title {
+    font-size: 20px;
     display: flex;
     justify-content: space-between;
   }
@@ -188,15 +209,15 @@ body {
   }
   
   .card:nth-child(2) {
-    background-color: #ff6d00;
+    background-color: #fa9343;
   }
   
   .card:nth-child(3) {
-    background-color: #2e7d32;
+    background-color: #8bff91;
   }
   
   .card:nth-child(4) {
-    background-color: #d50000;
+    background-color: #fa6363;
   }
   
   .card-inner {
@@ -256,13 +277,21 @@ body {
       grid-template-columns: 1fr;
       margin-top: 30px;
     }
+
+    
   }
   
   /* Extra Small <= 576px */
   
   @media screen and (max-width: 576px) {
-    .hedaer-left {
+    .header-left {
       display: none;
+    }
+    .header-right span{
+      display: none;
+    }
+    .header {
+      padding: 5px 12px 5px 12px;
     }
   }
   

@@ -17,7 +17,7 @@ export default function AdminNavbar({OpenSidebar}) {
         <div className='header-right'>
             <BsFillBellFill className='icon'/> &nbsp;
             {/* <BsFillEnvelopeFill className='icon'/> */}
-           Rushikesh Dantakale <BsPersonCircle className='icon profile-icon'/>
+           <span>Rushikesh Dantakale</span> <BsPersonCircle className='icon profile-icon'/>
         </div>
     </header>
   
