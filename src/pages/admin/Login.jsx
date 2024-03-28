@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar'
 import {useLocation, useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet';
@@ -15,6 +15,15 @@ export default function Login() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   console.log(pathname, 8);
+
+  useEffect(()=>{
+    const startRes =async () =>{
+      const res = await axios.get(`${import.meta.env.VITE_SERVER}/`)
+      console.log(res.data);
+    }
+
+    startRes()
+  },[])
 
   const submitData =async (e) =>{
     e.preventDefault();

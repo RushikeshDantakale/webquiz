@@ -124,7 +124,8 @@ body {
   }
 
   .profile-down li:hover{
-    background-color: #134d6f36;
+    background-color: #134d6f0a;
+    color: #fa9343;
   }
 
   .profile-down li:nth-child(1){
