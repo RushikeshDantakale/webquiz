@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {BsFillBellFill , BsFillEnvelopeFill , BsPersonCircle , BsSearch , BsJustify} from 'react-icons/bs';
 import "../admin.css"
 
 
 export default function AdminNavbar({OpenSidebar}) {
+
+  const [profileOpen , setProfileOpen] = useState(false);
+
   return (
   
    <header className='header'>
@@ -15,9 +18,20 @@ export default function AdminNavbar({OpenSidebar}) {
             <input type="text" placeholder='Search'/>
         </div>
         <div className='header-right'>
+          <div className="bell">
             <BsFillBellFill className='icon'/> &nbsp;
+          </div>
             {/* <BsFillEnvelopeFill className='icon'/> */}
-           <span>Rushikesh Dantakale</span> <BsPersonCircle className='icon profile-icon'/>
+            <div className='profile'>
+              <span onClick={()=> setProfileOpen(!profileOpen)}>Rushikesh</span> <BsPersonCircle onClick={()=> setProfileOpen(!profileOpen)} className='icon profile-icon'/>
+              {profileOpen ?  <div className='profile-down'>
+               
+                <li>Profile</li>
+                <li>Settings</li>
+                <li>Logout</li>
+      
+              </div> : null}
+           </div>
         </div>
     </header>
   
