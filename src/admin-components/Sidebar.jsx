@@ -11,7 +11,7 @@ import { Link, useLocation } from 'react-router-dom'
 export default function Sidebar({openSidebarToggle, OpenSidebar}) {
     
     const {pathname} = useLocation();
-    const active = {backgroundColor:"#dadada"};
+    const active = {backgroundColor:"#dadada" ,boxShadow : "inset -2px 0 0 0 red" };
     const nonActive = {border:"none"};
 
   return (
@@ -33,7 +33,7 @@ export default function Sidebar({openSidebarToggle, OpenSidebar}) {
             <Link className='no-underline' to="/admin/users">
                 <li className='sidebar-list-item' style={pathname == "/admin/users" ? active : nonActive}>
                     <a href="">
-                        <BsPeopleFill className='icon icon-head'/> Users
+                        <BsPeopleFill className='icon icon-head'/> Students
                     </a>
                 </li>
             </Link>

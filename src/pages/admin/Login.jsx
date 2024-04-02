@@ -42,6 +42,7 @@ export default function Login() {
     } catch (error) {
       // Handle network or other errors
       toast.error("An error occurred. Please try again.", { position: "top-right" });
+      console.log(error);
     }
     }
 

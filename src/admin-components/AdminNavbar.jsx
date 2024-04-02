@@ -6,6 +6,7 @@ import "../admin.css"
 export default function AdminNavbar({OpenSidebar}) {
 
   const [profileOpen , setProfileOpen] = useState(false);
+  const [bellOpen , setBellOpen] = useState(false);
 
   return (
   
@@ -19,18 +20,54 @@ export default function AdminNavbar({OpenSidebar}) {
         </div>
         <div className='header-right'>
           <div className="bell">
-            <BsFillBellFill className='icon'/> &nbsp;
+            <BsFillBellFill onClick={() => setBellOpen(!bellOpen)} className='icon'/>
+            {bellOpen ? 
+            <div className="bell-down">
+            <div className="title">
+              Notifications &nbsp;   <span>11</span> 
+            </div>
+              <div className='notifications'>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+                <li>dsf</li>
+              </div>
+            </div>
+            :
+            null
+            }
+             &nbsp;
           </div>
             {/* <BsFillEnvelopeFill className='icon'/> */}
             <div className='profile'>
               <span onClick={()=> setProfileOpen(!profileOpen)}>Rushikesh</span> <BsPersonCircle onClick={()=> setProfileOpen(!profileOpen)} className='icon profile-icon'/>
-              {profileOpen ?  <div className='profile-down'>
-               
-                <li>Profile</li>
-                <li>Settings</li>
-                <li>Logout</li>
-      
-              </div> : null}
+              {
+                profileOpen ?  
+                <div className='profile-down'>
+                  <li>Profile</li>
+                  <li>Settings</li>
+                  <li>Logout</li>
+                </div> :
+                 null
+              }
            </div>
         </div>
     </header>
