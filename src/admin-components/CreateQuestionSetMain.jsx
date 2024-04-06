@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 export default function CreateQuestionSetMain() {
 
@@ -9,28 +10,83 @@ export default function CreateQuestionSetMain() {
     number_of_question: null
   })
 
-  // const [questionPattern, setQuestionPattern] = useState("1");
-  // const [questions , setQuestions] = useState([])
+  const [questions , setQuestions] = useState([])
 
+ 
   const changeInput = (e) => {
-    e.preventDefault()
-    setQuestionSetInfo({ ...questionSetInfo, [e.target.name]: e.target.value })
-    // console.log(questionSetInfo , 16);
-  }
+    e.preventDefault();
+    setQuestionSetInfo({ ...questionSetInfo, [e.target.name]: e.target.value });
+  };
+
+  const changeQuestion = (e, questionIndex) => {
+    const newQuestions = [...questions];
+    newQuestions[questionIndex] = {
+      ...(newQuestions[questionIndex] || {}),
+      question: e.target.value,
+    };
+    setQuestions(newQuestions);
+  };
+
+  const changeChoice = (e, questionIndex, choiceIndex) => {
+    const newQuestions = [...questions];
+    newQuestions[questionIndex].choices = newQuestions[questionIndex].choices || [];
+    newQuestions[questionIndex].choices[choiceIndex] = e.target.value;
+    setQuestions(newQuestions);
+  };
+
+  const toggleAnswer = (e, questionIndex, choiceIndex) => {
+    const newQuestions = [...questions];
+    const question = newQuestions[questionIndex];
+    question.checkedAnswers = question.checkedAnswers || [];
+    const answerIndex = question.checkedAnswers.indexOf(choiceIndex);
+    if (e.target.checked) {
+      if (answerIndex === -1) {
+        question.checkedAnswers.push(choiceIndex);
+      }
+    } else {
+      if (answerIndex !== -1) {
+        question.checkedAnswers.splice(answerIndex, 1);
+      }
+    }
+    setQuestions(newQuestions);
+  };
 
   const cancel = () => {
-
+    setQuestionSetInfo({
+      set_name: null,
+      description: null,
+      number_of_question: null
+    })
   }
 
-  
+  const saveAndExit =async (e) => {
+    e.preventDefault()
+    const jsonData = {
+      set_name: questionSetInfo.set_name,
+      description: questionSetInfo.description,
+      number_of_question : questionSetInfo.number_of_question,
+      questions: questions.map(({ question, choices, checkedAnswers }) => ({
+        question,
+        choices,
+        checkedAnswers,
+      })),
+    };
+    console.log(jsonData,74);
+    console.log(typeof jsonData.questions[0].checkedAnswers[0],74);
+    try{
+      const response =await axios.post(`${import.meta.env.VITE_SERVER}/create_question_set`, jsonData);
+      console.log(response , 75);
 
-  const saveAndExit = () => {
+    }catch(error){
+      console.log(error);
+    }
+    // Send the jsonData to the server or process it further as needed
+  };
 
-  }
   return (<>
     <div className="container-fluid bg-white row rounded rounded-sm mt-2 px-4 py-4">
       <div className="col-md-12 ">
-        <form>
+        <form onSubmit={(e)=>saveAndExit(e)}>
           <div className="col-md-12">
             <div className="row mb-3">
               <label for="inputName" className="col-sm-2 col-form-label">Name of Question Set</label>
@@ -51,75 +107,82 @@ export default function CreateQuestionSetMain() {
                 <input type="number" name='number_of_question' onChange={(e) => changeInput(e)} className="form-control" id="inputPassword3" />
               </div>
             </div>
-
-            {/* <div class="input-group mb-3">
-              <label class="input-group-text" for="inputGroupSelect01">How Will You Fill Your Questions?</label>
-              <select class="form-select" id="inputGroupSelect01" onChange={(e) => {
-                e.preventDefault()
-                setQuestionPattern(e.target.value)
-              }
-              }>
-                <option value="1" selected>One by One</option>
-                <option value="2">4 at a Time</option>
-              </select>
-            </div> */}
           </div>
           <div className="row ">
-            {questionSetInfo.number_of_question
-              ? Array.from({ length: questionSetInfo.number_of_question }).map((_, index) => (
-                <>
-                <hr />
-                  <div key={index} className="col-md-12 mb-4">
-                    <input type="text" className="form-control" placeholder="Enter Your Question Here" />
-                  </div>
-                  <div className="col-md-6 mb-4">
-                    <input type="text" className="form-control" placeholder="Enter 1st Choice" />
-                  </div>
-                  <div className="col-md-6 mb-4">
-                    <input type="text" className="form-control" placeholder="Enter 2nd Choice" />
-                  </div>
-                  <div className="col-md-6 mb-4">
-                    <input type="text" className="form-control" placeholder="Enter 3rd Choice" />
-                  </div>
-                  <div className="col-md-6 mb-4">
-                    <input type="text" className="form-control" placeholder="Enter 4th Choice" />
-                  </div>
-                  <div className="col-md-12 mb-4">
-                    <h4>Correct Answers</h4>
-                    <div class="form-check col-md-3">
-                      <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" />
-                      <label class="form-check-label" for="flexCheckDefault">
-                        For A
-                      </label>
-                    </div>
-                    <div class="form-check col-md-3">
-                      <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" />
-                      <label class="form-check-label" for="flexCheckDefault">
-                        For B
-                      </label>
-                    </div>
-                    <div class="form-check col-md-3">
-                      <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" />
-                      <label class="form-check-label" for="flexCheckDefault">
-                        For C
-                      </label>
-                    </div>
-                    <div class="form-check col-md-3">
-                      <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" />
-                      <label class="form-check-label" for="flexCheckDefault">
-                        For D
-                      </label>
-                    </div>
-                  </div>
-                </>
-              ))
-              : null}
+          {questionSetInfo.number_of_question
+                ? Array.from({ length: questionSetInfo.number_of_question }).map((_, index) => (
+                    <>
+                      <hr />
+                      <div key={index} className="col-md-12 mb-4">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Your Question Here"
+                          value={questions[index]?.question || ''}
+                          onChange={(e) => changeQuestion(e, index)}
+                        />
+                      </div>
+                      <div className="col-md-6 mb-4">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter 1st Choice"
+                          value={questions[index]?.choices?.[0] || ''}
+                          onChange={(e) => changeChoice(e, index, 0)}
+                        />
+                      </div>
+                      <div className="col-md-6 mb-4">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter 2nd Choice"
+                          value={questions[index]?.choices?.[1] || ''}
+                          onChange={(e) => changeChoice(e, index, 1)}
+                        />
+                      </div>
+                      <div className="col-md-6 mb-4">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter 3rd Choice"
+                          value={questions[index]?.choices?.[2] || ''}
+                          onChange={(e) => changeChoice(e, index, 2)}
+                        />
+                      </div>
+                      <div className="col-md-6 mb-4">
+                        <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter 4th Choice"
+                          value={questions[index]?.choices?.[3] || ''}
+                          onChange={(e) => changeChoice(e, index, 3)}
+                        />
+                      </div>
+                      <div className="col-md-12 mb-4">
+                        <h4>Correct Answers</h4>
+                        {questions[index]?.choices?.map((choice, choiceIndex) => (
+                          <div key={choiceIndex} className="form-check col-md-3">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              checked={questions[index].checkedAnswers?.includes(choiceIndex)}
+                              onChange={(e) => toggleAnswer(e, index, choiceIndex)}
+                            />
+                            <label className="form-check-label">
+                              For {String.fromCharCode(65 + choiceIndex)}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  ))
+                : null}
 
 
           </div>
 
           <button onClick={cancel} className="btn btn-danger ">Cancel</button> &nbsp;
-          <button onClick={saveAndExit} className="btn btn-success ">Save</button>
+          <button type='submit'  className="btn btn-success ">Save</button>
         </form>
       </div>
     </div>
