@@ -11,6 +11,10 @@ import Users from "./pages/admin/Users";
 import Questions from "./pages/admin/Questions";
 import Reports from "./pages/admin/Reports";
 import CreateQuestionSet from "./pages/admin/CreateQuestionSet";
+import Profile from "./pages/admin/Profile";
+import ViewQuestionSet from "./pages/admin/ViewQuestionSet";
+import AdminState from "./context/admin/AdminState";
+import EditQuestion from "./pages/admin/EditQuestion";
 
 function App() {
 
@@ -28,15 +32,16 @@ function App() {
     <Route path='*' element=<NotFound/> />
 
     {/* Routes for admins */}
-    <Route path='/admin/dashboard' element=<Dashboard/> />
-    <Route path='/admin/users' element=<Users/> />
-    <Route path='/admin/questions' element=<Questions/> />
-    <Route path='/admin/questions/createquestionset' element=<CreateQuestionSet/> />
-    <Route path='/admin/reports' element=<Reports/> />
-    <Route path='/admin/login' element=<Login/> />
-
-    
-  </Routes>
+        <Route path='/admin/dashboard' element={<AdminState><Dashboard /></AdminState>} />
+          <Route path='/admin/users' element={<AdminState><Users /></AdminState>} />
+          <Route path='/admin/questions' element={<AdminState><Questions /></AdminState>} />
+          <Route path='/admin/questions/createquestionset' element={<AdminState><CreateQuestionSet /></AdminState>} />
+          <Route path='/admin/questions/viewquestionset' element={<AdminState><ViewQuestionSet /></AdminState>} />
+          <Route path='/admin/questions/editquestionset' element={<AdminState> <EditQuestion/> </AdminState>} />
+          <Route path='/admin/reports' element={<AdminState><Reports /></AdminState>} />
+          <Route path='/admin/login' element={<AdminState><Login /></AdminState>} />
+          <Route path='/admin/profile' element={<AdminState><Profile /></AdminState>} />
+        </Routes>
  </BrowserRouter>
     </>
   )

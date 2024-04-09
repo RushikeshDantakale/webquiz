@@ -1,23 +1,21 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 
 export default function CreateQuestionSetMain() {
-
-
   const [questionSetInfo, setQuestionSetInfo] = useState({
     set_name: null,
     description: null,
     number_of_question: null
   })
-
   const [questions , setQuestions] = useState([])
-
- 
+  const navigate= useNavigate()
   const changeInput = (e) => {
     e.preventDefault();
     setQuestionSetInfo({ ...questionSetInfo, [e.target.name]: e.target.value });
   };
-
   const changeQuestion = (e, questionIndex) => {
     const newQuestions = [...questions];
     newQuestions[questionIndex] = {
@@ -26,14 +24,12 @@ export default function CreateQuestionSetMain() {
     };
     setQuestions(newQuestions);
   };
-
   const changeChoice = (e, questionIndex, choiceIndex) => {
     const newQuestions = [...questions];
     newQuestions[questionIndex].choices = newQuestions[questionIndex].choices || [];
     newQuestions[questionIndex].choices[choiceIndex] = e.target.value;
     setQuestions(newQuestions);
   };
-
   const toggleAnswer = (e, questionIndex, choiceIndex) => {
     const newQuestions = [...questions];
     const question = newQuestions[questionIndex];
@@ -57,6 +53,7 @@ export default function CreateQuestionSetMain() {
       description: null,
       number_of_question: null
     })
+    navigate("/admin/questions")
   }
 
   const saveAndExit =async (e) => {
@@ -68,19 +65,19 @@ export default function CreateQuestionSetMain() {
       questions: questions.map(({ question, choices, checkedAnswers }) => ({
         question,
         choices,
-        checkedAnswers,
+        answer:checkedAnswers,
       })),
     };
-    console.log(jsonData,74);
-    console.log(typeof jsonData.questions[0].checkedAnswers[0],74);
     try{
+      // Send the jsonData to the server or process it further as needed
       const response =await axios.post(`${import.meta.env.VITE_SERVER}/create_question_set`, jsonData);
-      console.log(response , 75);
-
+      toast.success(response.data.message, { position: "top-right" });
+      setInterval(() => {
+        navigate("/admin/questions")
+      }, 3000);
     }catch(error){
-      console.log(error);
+      toast.error(error.response.data.error, { position: "top-right" });
     }
-    // Send the jsonData to the server or process it further as needed
   };
 
   return (<>
@@ -186,5 +183,7 @@ export default function CreateQuestionSetMain() {
         </form>
       </div>
     </div>
+    <ToastContainer/>
+
   </>)
 }

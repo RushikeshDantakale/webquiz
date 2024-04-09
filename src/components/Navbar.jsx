@@ -18,9 +18,9 @@ export default function Navbar({sub}) {
               <div className={`nav-items ${pathname == "/" ? "navbar-active" : ""}`}>Home</div>
             </NavLink>
 
-            <NavLink className="no-underline" to="/user/contact">
+            {/* <NavLink className="no-underline" to="/user/contact">
               <div className={`nav-items ${pathname == "/user/contact" ? "navbar-active" : ""}`}>Contact Us</div>
-            </NavLink>
+            </NavLink> */}
             <NavLink className="no-underline" to="/user/register">
               <div className={`nav-items ${pathname == "/user/register" ? "navbar-active" : ""}`}>Register & Go!</div>
             </NavLink>

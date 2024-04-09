@@ -15,7 +15,7 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: #DEE0E6;
+    background-color: #DEE0E6 !important;
     font-family:"Poppins", sans-serif;
 }
 .navbar{
@@ -69,50 +69,6 @@ body{
     background-color: whitesmoke;
 }
 
-.question-left{
-    flex: 1.2;
-    padding:20px 20px;
-    width: 40%;
-    color: #134E6F;
-    font-weight: 600;
-    font-size: 22px;
-}
-
-.question-right{
-    flex:1;
-    padding: 20px 20px;
-}
-
-.quiz-question{
-    font-size: 32px;
-    margin-bottom: 20px;
-    text-align: start;
-}
-
-.rules{
-    height: max-content;
-    background-color: whitesmoke;
-    margin: 0 20px;
-    padding: 20px 20px;
-
-}
-
-.checkbox{
- height: 20px;
- width: 20px;
- accent-color: #FFA822;
- color: white !important;
- outline:none;
-}
-
-.options{
-    display:flex;
-    align-items: center;
-    color: #134E6F;
-    gap: 30px;
-    font-size: 24px;
-    font-weight: 300;
-}
 
 
 .btn-group{
@@ -121,7 +77,7 @@ body{
     gap: 10px;
 }
 
-.btn{
+.btnn{
     font-size: 24px;
     font-weight: 900;
     border-radius: 6px;  
@@ -163,7 +119,7 @@ body{
     margin-top: 4rem;
 }
 
-.w-50{
+.width-50{
     width: 50%;
 }
 
@@ -188,11 +144,27 @@ body{
 
 .contact input[type='email']{
     height: 50px;
-    width: 80%;
-    margin-bottom: 2rem;
+    width: 100%;
+    margin-bottom: 10px;
     outline: 2px solid rgb(213, 212, 212);
     border: none;
     padding:  5px 15px;
+}
+
+.contact select{
+    height:50px;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    outline: 2px solid rgb(213, 212, 212);
+    border: none;
+    padding:  5px 15px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #134E6F;
+}
+
+.contact select:focus{
+    outline: 2px solid #FFA822;
 }
 
 .contact label{

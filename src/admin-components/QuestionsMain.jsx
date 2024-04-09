@@ -1,78 +1,97 @@
-import React from 'react'
+import  axios  from 'axios';
+import React, { useContext, useEffect, useState } from 'react'
 import { BiSolidEdit, BiTrash } from "react-icons/bi";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AdminContext from '../context/admin/AdminContext';
 
 
 export default function QuestionsMain() {
-
-
+  const [topic , setTopic] = useState([])
+  const {update} = useContext(AdminContext);
   const navigate = useNavigate()
-  var rowArr = []
+  useEffect(()=>{
+    const fetchTopics =async ()=>{
+        const topics = await axios.get(`${import.meta.env.VITE_SERVER}/get-topics`)
+        setTopic(topics.data)
+    }  
+    fetchTopics()
+  },[])
 
-  for (let i = 1; i <= 50; i++) {
-    rowArr.push(i);
+  const deleteRecord =async (id,topic_code) =>{
+    if(confirm("Do You Really Want To Delete this Reacord?")){
+      console.log(topic_code,20);
+      const res = await axios.delete(`${import.meta.env.VITE_SERVER}/delete/${id}/${topic_code}`)
+
+      console.log(res , 24);
+      if(res.data.message){
+        toast.success(res.data.message, { position: "top-right" });
+        setInterval(() => {
+          window.location.reload();
+        }, 3000);
+      }
+    }
   }
 
-  // console.log(rowArr);
+  const viewRecord = (item) =>{
+    update("questionInfo",item)
+    navigate("/admin/questions/viewquestionset")
+  }
 
-
-
-  return (
+  const editRecord = (item) =>{
+    update("questionInfo",item)
+    navigate("/admin/questions/editquestionset")
+  }
+  return (<>
     <div className="questionmain-outer">
-   
-<div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog">
-    <div className="modal-content">
-      <div className="modal-header bg-warning ">
-        <h5 className="modal-title" id="exampleModalLabel">Delete</h5>
-        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
-        Do You Really Want To Delete This Record?
-      </div>
-      <div className="modal-footer">
-        <button type="button" className="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" className="btn btn-success">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
       <div className="title-btns mb-4">
-        <button onClick={()=> navigate("/admin/questions/createquestionset") }>
+        <button onClick={() => navigate("/admin/questions/createquestionset")}>
           Add a Question set
         </button>
       </div>
+{topic.length === 0 ? <><h3>There are No Records Here!</h3></>:
+       <div className="table-responsive ">
+        <table className="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th>Sr No.</th>
+              <th>Que Set Name</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              topic.map((item,index ) => {
+                return (<tr>
+                  <td>{index+1}</td>
+                  <td>{item.name}</td>
+                  <td>{item.description}</td>
+                  <td> 
+                  <BiSolidEdit  
+                  onClick={(e)=> 
+                  {
+                    e.preventDefault()
+                    editRecord(item)
+                  }}
+                  style={{ cursor: "pointer" }} className='icon text-success' /> | 
+                  <BiTrash  onClick={()=>deleteRecord(item._id,item.topic_code)} style={{ cursor: "pointer" }} className='icon text-danger' /> | <FaEye onClick={(e)=> 
+                  {
+                    e.preventDefault()
+                    viewRecord(item)}} style={{ cursor: "pointer" }} className='icon text-info' /> </td>
+                </tr>);
+              })
+            }
+          </tbody>
 
-
-      <div className="table-responsive ">
-        <table   className="table table-striped table-hover ">
-        <thead>
-          <tr>
-            <th>Sr No.</th>
-            <th>Que Set Name</th>
-            <th>Description</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            rowArr.map((item) => {
-              {/* console.log(); */ }
-              return (<tr>
-                <td>{item}</td>
-                <td>Science</td>
-                <td>This is a science quiz</td>
-                <td> <BiSolidEdit style={{cursor:"pointer"}} className='icon text-success' /> | <BiTrash  data-bs-toggle="modal" data-bs-target="#exampleModal" style={{cursor:"pointer"}} className='icon text-danger' /> | <FaEye style={{cursor:"pointer"}} className='icon text-info'/> </td>
-              </tr>);
-            })
-          }
-        </tbody>
- 
         </table>
       </div>
+}
     </div>
-
+    <ToastContainer/>
+</>
   )
 }

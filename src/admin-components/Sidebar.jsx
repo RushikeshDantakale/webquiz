@@ -33,7 +33,7 @@ export default function Sidebar({openSidebarToggle, OpenSidebar}) {
             <Link className='no-underline' to="/admin/users">
                 <li className='sidebar-list-item' style={pathname == "/admin/users" ? active : nonActive}>
                     <a href="">
-                        <BsPeopleFill className='icon icon-head'/> Students
+                        <BsPeopleFill className='icon icon-head'/> Users
                     </a>
                 </li>
             </Link>

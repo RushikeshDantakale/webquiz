@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import {BsFillBellFill , BsFillEnvelopeFill , BsPersonCircle , BsSearch , BsJustify} from 'react-icons/bs';
 import "../admin.css"
 
@@ -62,7 +63,7 @@ export default function AdminNavbar({OpenSidebar}) {
               {
                 profileOpen ?  
                 <div className='profile-down'>
-                  <li>Profile</li>
+                  <Link to="/admin/profile"><li>Profile</li></Link>
                   <li>Settings</li>
                   <li>Logout</li>
                 </div> :
