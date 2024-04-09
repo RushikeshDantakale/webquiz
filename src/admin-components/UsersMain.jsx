@@ -23,7 +23,8 @@ export default function UsersMain() {
   }, [])
 
   console.log(users,25);
-  const deleteRecord =async (id) =>{
+  const deleteRecord =async (e,id) =>{
+    e.preventDefault()
     if(confirm("Do You Really Want To Delete this Record?")){
       const res = await axios.delete(`${import.meta.env.VITE_SERVER}/userDelete/${id}`)
 
@@ -64,7 +65,7 @@ export default function UsersMain() {
                 <td>{user.topic_name}</td>
                 <td>{user.topic_code}</td>
                 <td>{new Date(user.createdAt).toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: 'numeric' })}</td>
-                <td><BiTrash style={{ cursor: "pointer" }} className='icon text-danger' onClick={()=>deleteRecord(user._id)} /></td>
+                <td><BiTrash style={{ cursor: "pointer" }} className='icon text-danger' onClick={(e)=>deleteRecord(e,user._id)} /></td>
               </tr>)
             })
           }
