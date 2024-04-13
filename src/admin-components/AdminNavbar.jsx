@@ -51,7 +51,7 @@ export default function AdminNavbar({OpenSidebar}) {
           </div> */}
             {/* <BsFillEnvelopeFill className='icon'/> */}
             <div className='profile'>
-              <span onClick={()=> setProfileOpen(!profileOpen)}>{user.username}</span> <BsPersonCircle onClick={()=> setProfileOpen(!profileOpen)} className='icon profile-icon'/>
+              <span onClick={()=> setProfileOpen(!profileOpen)}></span> <BsPersonCircle onClick={()=> setProfileOpen(!profileOpen)} className='icon profile-icon'/>
               {
                 profileOpen ?  
                 <div className='profile-down'>
