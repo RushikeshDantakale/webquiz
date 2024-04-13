@@ -13,7 +13,8 @@ export default function AdminNavbar({OpenSidebar}) {
   // const [bellOpen , setBellOpen] = useState(false);
   const navigate = useNavigate()
 
-  const logout = () =>{
+  const logout = (e) =>{
+    e.preventDefault()
     if(confirm("Do You Really Want To End this Session?")){
       sessionStorage.removeItem("user")
       // console.log(sessionStorage.getItem("user"));
@@ -56,7 +57,7 @@ export default function AdminNavbar({OpenSidebar}) {
                 profileOpen ?  
                 <div className='profile-down'>
                   <Link to="/admin/profile"><li>Profile</li></Link>
-                  <li onClick={logout}>Logout</li>
+                  <li onClick={(e)=> logout(e)}>Logout</li>
                 </div> :
                  null
               }
