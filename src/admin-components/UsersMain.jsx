@@ -65,7 +65,7 @@ export default function UsersMain() {
                 <td>{user.topic_name}</td>
                 <td>{user.topic_code}</td>
                 <td>{new Date(user.createdAt).toLocaleDateString('en-US',{ year: 'numeric', month: 'long', day: 'numeric' })}</td>
-                <td><BiTrash style={{ cursor: "pointer" }} className='icon text-danger' onClick={(e)=>deleteRecord(e,user._id)} /></td>
+                <td><BiTrash data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Record" style={{ cursor: "pointer" }} className='icon text-danger' onClick={(e)=>deleteRecord(e,user._id)} /></td>
               </tr>)
             })
           }

@@ -15,34 +15,35 @@ import Profile from "./pages/admin/Profile";
 import ViewQuestionSet from "./pages/admin/ViewQuestionSet";
 import AdminState from "./context/admin/AdminState";
 import EditQuestion from "./pages/admin/EditQuestion";
+import UserState from "./context/user/UserState";
 
 function App() {
 
   return (
     <>
- <BrowserRouter>
-  <Routes>
+      <BrowserRouter>
+        <Routes>
 
-    {/* Routes for users */}
-    <Route path='/' element=<Home/> />
-    <Route path='/user/quiz' element=<Quiz/> />
-    <Route path='/user/contact' element=<Contact/> />
-    <Route path='/user/login' element=<Login/> />
-    <Route path='/user/register' element=<Register/> />
-    <Route path='*' element=<NotFound/> />
+          {/* Routes for users */}
+          <Route path='/' element=<UserState><Home /></UserState> />
+          <Route path='/user/quiz' element=<UserState><Quiz /></UserState> />
+          <Route path='/user/contact' element=<UserState><Contact /></UserState> />
+          <Route path='/user/login' element=<UserState><Login /></UserState> />
+          <Route path='/user/register' element=<UserState><Register /></UserState> />
+          <Route path='*' element=<NotFound /> />
 
-    {/* Routes for admins */}
-        <Route path='/admin/dashboard' element={<AdminState><Dashboard /></AdminState>} />
+          {/* Routes for admins */}
+          <Route path='/admin/dashboard' element={<AdminState><Dashboard /></AdminState>} />
           <Route path='/admin/users' element={<AdminState><Users /></AdminState>} />
           <Route path='/admin/questions' element={<AdminState><Questions /></AdminState>} />
           <Route path='/admin/questions/createquestionset' element={<AdminState><CreateQuestionSet /></AdminState>} />
           <Route path='/admin/questions/viewquestionset' element={<AdminState><ViewQuestionSet /></AdminState>} />
-          <Route path='/admin/questions/editquestionset' element={<AdminState> <EditQuestion/> </AdminState>} />
+          <Route path='/admin/questions/editquestionset' element={<AdminState> <EditQuestion /> </AdminState>} />
           <Route path='/admin/reports' element={<AdminState><Reports /></AdminState>} />
           <Route path='/admin/login' element={<AdminState><Login /></AdminState>} />
           <Route path='/admin/profile' element={<AdminState><Profile /></AdminState>} />
         </Routes>
- </BrowserRouter>
+      </BrowserRouter>
     </>
   )
 }

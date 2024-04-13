@@ -8,7 +8,11 @@ export default function CreateQuestionSetMain() {
   const [questionSetInfo, setQuestionSetInfo] = useState({
     set_name: null,
     description: null,
-    number_of_question: null
+    number_of_question: null,
+    quiz_time : {
+      hr:null,
+      min:null
+    }
   })
   const [questions , setQuestions] = useState([])
   const navigate= useNavigate()
@@ -30,6 +34,18 @@ export default function CreateQuestionSetMain() {
     newQuestions[questionIndex].choices[choiceIndex] = e.target.value;
     setQuestions(newQuestions);
   };
+
+  const changeTime = (e) =>{
+    e.preventDefault()
+    setQuestionSetInfo({
+      ...questionSetInfo,
+      quiz_time: {
+        ...questionSetInfo.quiz_time,
+        [e.target.name]: parseInt(e.target.value)
+      }
+    })
+
+  }
   const toggleAnswer = (e, questionIndex, choiceIndex) => {
     const newQuestions = [...questions];
     const question = newQuestions[questionIndex];
@@ -62,6 +78,7 @@ export default function CreateQuestionSetMain() {
       set_name: questionSetInfo.set_name,
       description: questionSetInfo.description,
       number_of_question : questionSetInfo.number_of_question,
+      quiz_time:questionSetInfo.quiz_time,
       questions: questions.map(({ question, choices, checkedAnswers }) => ({
         question,
         choices,
@@ -86,23 +103,36 @@ export default function CreateQuestionSetMain() {
         <form onSubmit={(e)=>saveAndExit(e)}>
           <div className="col-md-12">
             <div className="row mb-3">
-              <label for="inputName" className="col-sm-2 col-form-label">Name of Question Set</label>
+              <label htmlFor="inputName" className="col-sm-2 col-form-label">Name of Question Set</label>
               <div className="col-sm-10">
                 <input name='set_name' onChange={(e) => changeInput(e)} type="Text" className="form-control" id="inputName" />
               </div>
             </div>
 
             <div className="row mb-3">
-              <label for="inputDesc" className="col-sm-2 col-form-label">Description</label>
+              <label htmlFor="inputDesc" className="col-sm-2 col-form-label">Description</label>
               <div className="col-sm-10">
                 <textarea onChange={(e) => changeInput(e)} name="description" className='form-control' id="inputDesc" cols="30" rows="8"></textarea>
               </div>
             </div>
-            <div className="row mb-4">
-              <label for="inputPassword3" className="col-sm-2 col-form-label">No of Question</label>
-              <div className="col-sm-10">
+            <div className="row col-md-6 mb-4">
+              <label htmlFor="inputPassword3" className="col-sm-4 col-form-label">No of Question</label>
+              <div className="col-sm-8">
                 <input type="number" name='number_of_question' onChange={(e) => changeInput(e)} className="form-control" id="inputPassword3" />
               </div>
+            </div>
+            <div className="row col-md-6 mb-4">
+              <label htmlFor="inputPassword3" className="col-sm-4 col-form-label">Time :</label>
+              <div className="col-sm-2">
+                <input type="number" name='hr' onChange={(e) => changeTime(e)} className="form-control" id="inputPassword3" />
+              </div>
+              <label htmlFor="inputPassword3" className="col-sm-1 col-form-label">Hr</label>
+
+              <div className="col-sm-2">
+                <input type="number" name='min' onChange={(e) => changeTime(e)} className="form-control" id="inputPassword3" />
+              </div>
+              <label htmlFor="inputPassword3" className="col-sm-1 col-form-label">Min</label>
+
             </div>
           </div>
           <div className="row ">

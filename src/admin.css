@@ -6,6 +6,14 @@ body {
     font-family: 'Montserrat', sans-serif;
   }
 
+
+.form-control:focus {
+  box-shadow: none !important;
+  border: 1.5px solid #eeb45ee4 !important;
+  
+  outline:none !important;
+}
+
   /* Hide scrollbar for Chrome, Safari and Opera */
 *::-webkit-scrollbar {
   display: none;
@@ -277,6 +285,9 @@ body {
   .sidebar-list-item {
     padding: 20px 20px 20px 20px;
     font-size: 18px;
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
   }
   
   .sidebar-list-item:hover {
@@ -284,11 +295,6 @@ body {
     cursor: pointer;
   }
   
-  .sidebar-list-item > a {
-    text-decoration: none;
-    color: black;
-    font-weight: 600;
-  }
   
   .sidebar-responsive {
     display: inline !important;

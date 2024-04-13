@@ -11,6 +11,9 @@ import { Link, useLocation } from 'react-router-dom'
 export default function Sidebar({openSidebarToggle, OpenSidebar}) {
     
     const {pathname} = useLocation();
+    const question = pathname.startsWith('/admin/question');
+    const user = pathname.startsWith('/admin/users');
+    // const question = location.pathname.startsWith('/admin/question/');
     const active = {backgroundColor:"#dadada" ,boxShadow : "inset -2px 0 0 0 red" };
     const nonActive = {border:"none"};
 
@@ -23,39 +26,39 @@ export default function Sidebar({openSidebarToggle, OpenSidebar}) {
         </div>
 
         <ul className='sidebar-list'>
-            <Link className='no-underline' to="/admin/dashboard">
+            {/* <Link className='no-underline' to="/admin/dashboard">
                 <li className='sidebar-list-item' style={pathname == "/admin/dashboard" ? active : nonActive}>
-                    <a href="">
+                   
                         <BsGrid1X2Fill className='icon icon-head'/> Dashboard
-                    </a>
+                    
                 </li>
-            </Link>
+            </Link> */}
             <Link className='no-underline' to="/admin/users">
-                <li className='sidebar-list-item' style={pathname == "/admin/users" ? active : nonActive}>
-                    <a href="">
+                <li className='sidebar-list-item' style={user ? active : nonActive}>
+                  
                         <BsPeopleFill className='icon icon-head'/> Users
-                    </a>
+                    
                 </li>
             </Link>
             <Link className='no-underline' to="/admin/questions">
-                <li className='sidebar-list-item' style={pathname == "/admin/questions" ? active : nonActive}>
-                    <a href="">
+                <li className='sidebar-list-item' style={question ? active : nonActive}>
+                  
                         <BsListCheck className='icon icon-head'/> Questions
-                    </a>
+                    
                 </li>
             </Link>
-            <Link className='no-underline' to="/admin/reports">
+            {/* <Link className='no-underline' to="/admin/reports">
                 <li className='sidebar-list-item' style={pathname == "/admin/reports" ? active : nonActive}>
-                    <a href="">
+                  
                         <BsMenuButtonWideFill className='icon icon-head'/> Reports
-                    </a>
+                    
                 </li>
-            </Link>
+            </Link> */}
             {/* <Link className='no-underline' to="/admin/settings">
                 <li className='sidebar-list-item' style={pathname == "/admin/settings" ? active : nonActive}>
-                    <a href="">
+                  
                         <BsFillGearFill className='icon icon-head'/> Settings
-                    </a>
+                    
                 </li>
             </Link> */}
         </ul>

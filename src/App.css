@@ -70,7 +70,6 @@ body{
 }
 
 
-
 .btn-group{
     display: flex;
     justify-content: end;
@@ -363,21 +362,23 @@ body{
 }
 
 .login input{
-    width: 90%;
+    width: 100%;
     padding: 10px 15px;
     font-size: 22px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border-radius: 5px;
     border: none;
+    outline: 1px solid rgb(227, 227, 227);
+    
 }
 
 .login input:focus{
-    outline: 2px solid rgb(230, 230, 230);
+    outline: 2px solid #FFA822;
 }
 
 
 .login button{
-    width: 98%;
+    width: 100%;
     font-size: 32px;
     font-size: 30px;
     font-weight: 600;
@@ -387,12 +388,12 @@ body{
     padding: 5px 15px;
     transition: all ease-in-out 0.3sec;
     border-radius: 5px;
+    margin-top: 20px;
 }
 
 .login button:hover{
     outline: 2px solid #f2d2a2;
-    color: #FFA822;
-    background-color: #ffeaca;
+    background-color: #ffa722e5;
 }
 
 

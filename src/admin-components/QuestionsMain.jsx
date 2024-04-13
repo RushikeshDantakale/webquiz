@@ -21,11 +21,8 @@ export default function QuestionsMain() {
   },[])
 
   const deleteRecord =async (id,topic_code) =>{
-    if(confirm("Do You Really Want To Delete this Reacord?")){
-      console.log(topic_code,20);
+    if(confirm("Do You Really Want To Delete this Record?")){
       const res = await axios.delete(`${import.meta.env.VITE_SERVER}/delete/${id}/${topic_code}`)
-
-      console.log(res , 24);
       if(res.data.message){
         toast.success(res.data.message, { position: "top-right" });
         setInterval(() => {
@@ -48,7 +45,9 @@ export default function QuestionsMain() {
     <div className="questionmain-outer">
 
       <div className="title-btns mb-4">
-        <button onClick={() => navigate("/admin/questions/createquestionset")}>
+        <button onClick={(e) =>{ 
+          e.preventDefault()
+          navigate("/admin/questions/createquestionset")}}>
           Add a Question set
         </button>
       </div>
@@ -71,14 +70,18 @@ export default function QuestionsMain() {
                   <td>{item.name}</td>
                   <td>{item.description}</td>
                   <td> 
-                  <BiSolidEdit  
+                  <BiSolidEdit
+                  data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Record"  
                   onClick={(e)=> 
                   {
                     e.preventDefault()
                     editRecord(item)
                   }}
                   style={{ cursor: "pointer" }} className='icon text-success' /> | 
-                  <BiTrash  onClick={()=>deleteRecord(item._id,item.topic_code)} style={{ cursor: "pointer" }} className='icon text-danger' /> | <FaEye onClick={(e)=> 
+                  <BiTrash data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Record"  onClick={()=>deleteRecord(item._id,item.topic_code)} style={{ cursor: "pointer" }} className='icon text-danger' /> | 
+                  <FaEye 
+                  data-bs-toggle="tooltip" data-bs-placement="top" title="View Record"
+                  onClick={(e)=> 
                   {
                     e.preventDefault()
                     viewRecord(item)}} style={{ cursor: "pointer" }} className='icon text-info' /> </td>

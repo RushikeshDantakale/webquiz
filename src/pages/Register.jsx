@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import axios from "axios"
+import userContext from '../context/user/UserContext';
 
 export default function Register() {
   const [topics, setTopics] = useState([])
@@ -11,12 +12,12 @@ export default function Register() {
     topic_name: null,
     topic_code: null
   })
+  const {update} = useContext(userContext)
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTopics = async () => {
       const res = await axios.get(`${import.meta.env.VITE_SERVER}/get-topics`)
-      console.log(res.data)
       setTopics(res.data)
     }
     fetchTopics()
@@ -46,13 +47,14 @@ export default function Register() {
 
   const verifyUser = async (e) => {
     e.preventDefault()
-    console.log(selected, 11)
     if (!selected.email || !selected.topic_code || !selected.topic_name) {
       return alert("All Fields Are Supposed To Be Filled!")
     }
     try {
       const res = await axios.post(`${import.meta.env.VITE_SERVER}/user/register`, selected)
-      console.log(res);
+      const {topic_info , questions} = res.data.data
+      update("topic_info",topic_info)
+      update("questions",questions)
       navigate("/user/quiz")
     } catch (error) {
       console.log(error);
