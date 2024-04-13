@@ -25,8 +25,10 @@ export default function Login() {
     try {
       const response = await axios.post(`${import.meta.env.VITE_SERVER}/admin/login`, data);
       if (response.status === 200) {
+        console.log(response.data.user , 28)
         //setting the user into session storage
         sessionStorage.setItem("user", JSON.stringify(response.data.user))
+        console.log(sessionStorage.getItem("user"),31);
         // Login successful
         toast.success(response.data.message, { position: "top-right" });
         setTimeout(() => {

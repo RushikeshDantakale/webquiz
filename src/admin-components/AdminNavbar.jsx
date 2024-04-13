@@ -8,13 +8,15 @@ import  {useNavigate} from "react-router-dom"
 export default function AdminNavbar({OpenSidebar}) {
 
   const [profileOpen , setProfileOpen] = useState(false);
-  const user = JSON.parse(sessionStorage.getItem("user"))[0]
+  // const user = JSON.parse(sessionStorage.getItem("user"))[0]
+  // console.log(typeof user);
   // const [bellOpen , setBellOpen] = useState(false);
   const navigate = useNavigate()
 
   const logout = () =>{
     if(confirm("Do You Really Want To End this Session?")){
       sessionStorage.removeItem("user")
+      // console.log(sessionStorage.getItem("user"));
       
       navigate("/admin/login")
     }
