@@ -22,13 +22,10 @@ export default function UsersMain() {
     }
   }, [])
 
-  console.log(users,25);
   const deleteRecord =async (e,id) =>{
     e.preventDefault()
     if(confirm("Do You Really Want To Delete this Record?")){
       const res = await axios.delete(`${import.meta.env.VITE_SERVER}/userDelete/${id}`)
-
-      console.log(res , 24);
       if(res.data.message){
         toast.success(res.data.message, { position: "top-right" });
         setInterval(() => {
