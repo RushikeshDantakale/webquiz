@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink, useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
+import userContext from '../context/user/UserContext';
+import Timer from './Timer';
 
 export default function Navbar({sub}) {
   const {pathname} = useLocation();
   const [open , setOpen] = useState(false);
   return (
     <div className='w-100 navbar'>
+            <NavLink className="no-underline" to="/">
+
       <div className='logo'>ReactJS<span className='logo-inner'>Quiz</span></div>
+      </NavLink>
       {
         sub=="home"
         ? <>
@@ -30,14 +35,7 @@ export default function Navbar({sub}) {
        </div>
         </>
         :<>
-        <div className='nav-outer'>
-            <div className='nav-items count'>
-            Count&nbsp;  : &nbsp;  4/10
-            </div>
-            <div className='nav-items count'>
-            Time Remaining <span className='count-inner'> 10 : 00 </span> 
-            </div>
-       </div>
+        <Timer/>
 
        </>
       }

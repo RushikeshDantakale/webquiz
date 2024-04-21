@@ -4,5 +4,12 @@ function convertToMilliseconds(hours, minutes) {
   }
   
 
+  function convertSecondsToHoursAndMinutes (seconds)  {
+    const hr = Math.floor(seconds / 3600);
+    const remainingSeconds = seconds % 3600;
+    const min = Math.floor(remainingSeconds / 60);
+    return { hr, min };
+  };
 
-  export {convertToMilliseconds} ;
+
+  export {convertToMilliseconds , convertSecondsToHoursAndMinutes} ;

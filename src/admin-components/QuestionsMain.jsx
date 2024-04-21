@@ -25,7 +25,7 @@ export default function QuestionsMain() {
       const res = await axios.delete(`${import.meta.env.VITE_SERVER}/delete/${id}/${topic_code}`)
       if(res.data.message){
         toast.success(res.data.message, { position: "top-right" });
-        setInterval(() => {
+        setTimeout(() => {
           window.location.reload();
         }, 3000);
       }
@@ -37,9 +37,12 @@ export default function QuestionsMain() {
     navigate("/admin/questions/viewquestionset")
   }
 
-  const editRecord = (item) =>{
+  const editRecord = (e,item) =>{
+    e.preventDefault()
     update("questionInfo",item)
+    console.log("before going to edit question");
     navigate("/admin/questions/editquestionset")
+    console.log("after went to the edit questions");
   }
   return (<>
     <div className="questionmain-outer">
@@ -74,11 +77,12 @@ export default function QuestionsMain() {
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Record"  
                   onClick={(e)=> 
                   {
-                    e.preventDefault()
-                    editRecord(item)
+                    editRecord(e,item)
                   }}
                   style={{ cursor: "pointer" }} className='icon text-success' /> | 
-                  <BiTrash data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Record"  onClick={()=>deleteRecord(item._id,item.topic_code)} style={{ cursor: "pointer" }} className='icon text-danger' /> | 
+                  <BiTrash data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Record"  onClick={(e)=> {
+                    e.preventDefault()
+                    deleteRecord(item._id,item.topic_code)}} style={{ cursor: "pointer" }} className='icon text-danger' /> | 
                   <FaEye 
                   data-bs-toggle="tooltip" data-bs-placement="top" title="View Record"
                   onClick={(e)=> 

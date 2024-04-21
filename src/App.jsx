@@ -16,6 +16,7 @@ import ViewQuestionSet from "./pages/admin/ViewQuestionSet";
 import AdminState from "./context/admin/AdminState";
 import EditQuestion from "./pages/admin/EditQuestion";
 import UserState from "./context/user/UserState";
+import AddQuestions from "./pages/admin/AddQuestions";
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
           <Route path='/admin/dashboard' element={<AdminState><Dashboard /></AdminState>} />
           <Route path='/admin/users' element={<AdminState><Users /></AdminState>} />
           <Route path='/admin/questions' element={<AdminState><Questions /></AdminState>} />
+          <Route path='/admin/questions/AddQuestions/:topic_id' element={<AdminState><AddQuestions/></AdminState>} />
           <Route path='/admin/questions/createquestionset' element={<AdminState><CreateQuestionSet /></AdminState>} />
           <Route path='/admin/questions/viewquestionset' element={<AdminState><ViewQuestionSet /></AdminState>} />
           <Route path='/admin/questions/editquestionset' element={<AdminState> <EditQuestion /> </AdminState>} />

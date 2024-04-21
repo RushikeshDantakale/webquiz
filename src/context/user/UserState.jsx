@@ -3,7 +3,9 @@ import userContext from "./UserContext";
 const UserState = (props) =>{
     const [state , setState] = useState({
         topic_info:null,
-        questions:null
+        questions:null,
+        agreedToTerms:false,
+        timeOver:false
     });
 
     const update =(name, value )=> setState(prevState => ({

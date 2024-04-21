@@ -28,7 +28,7 @@ export default function UsersMain() {
       const res = await axios.delete(`${import.meta.env.VITE_SERVER}/userDelete/${id}`)
       if(res.data.message){
         toast.success(res.data.message, { position: "top-right" });
-        setInterval(() => {
+        setTimeout(() => {
           window.location.reload();
         }, 3000);
       }
@@ -38,7 +38,7 @@ export default function UsersMain() {
 
   return (<>
 
-    <div className="'container-fluid bg-white rounded rounded-sm p-4 ">
+    <div className="'container-fluid bg-white rounded rounded-sm p-4 overflow-x-scroll">
       {
         users.length==0 ? <h3>Theres nothing to show here...</h3> :
       <table className="table table-striped table-hover ">

@@ -85,11 +85,12 @@ export default function CreateQuestionSetMain() {
         answer:checkedAnswers,
       })),
     };
+
     try{
       // Send the jsonData to the server or process it further as needed
       const response =await axios.post(`${import.meta.env.VITE_SERVER}/create_question_set`, jsonData);
       toast.success(response.data.message, { position: "top-right" });
-      setInterval(() => {
+      setTimeout(() => {
         navigate("/admin/questions")
       }, 3000);
     }catch(error){
@@ -97,7 +98,8 @@ export default function CreateQuestionSetMain() {
     }
   };
 
-  return (<>
+  return (
+  <>
     <div className="container-fluid bg-white row rounded rounded-sm mt-2 px-4 py-4">
       <div className="col-md-12 ">
         <form onSubmit={(e)=>saveAndExit(e)}>
@@ -108,7 +110,6 @@ export default function CreateQuestionSetMain() {
                 <input name='set_name' onChange={(e) => changeInput(e)} type="Text" className="form-control" id="inputName" />
               </div>
             </div>
-
             <div className="row mb-3">
               <label htmlFor="inputDesc" className="col-sm-2 col-form-label">Description</label>
               <div className="col-sm-10">
@@ -127,12 +128,10 @@ export default function CreateQuestionSetMain() {
                 <input type="number" name='hr' onChange={(e) => changeTime(e)} className="form-control" id="inputPassword3" />
               </div>
               <label htmlFor="inputPassword3" className="col-sm-1 col-form-label">Hr</label>
-
               <div className="col-sm-2">
                 <input type="number" name='min' onChange={(e) => changeTime(e)} className="form-control" id="inputPassword3" />
               </div>
               <label htmlFor="inputPassword3" className="col-sm-1 col-form-label">Min</label>
-
             </div>
           </div>
           <div className="row ">
@@ -215,5 +214,6 @@ export default function CreateQuestionSetMain() {
     </div>
     <ToastContainer/>
 
-  </>)
+  </>
+  )
 }
