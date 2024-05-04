@@ -17,6 +17,7 @@ import AdminState from "./context/admin/AdminState";
 import EditQuestion from "./pages/admin/EditQuestion";
 import UserState from "./context/user/UserState";
 import AddQuestions from "./pages/admin/AddQuestions";
+import ResponseUser from "./pages/ResponseUser";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path='/user/contact' element=<UserState><Contact /></UserState> />
           <Route path='/user/login' element=<UserState><Login /></UserState> />
           <Route path='/user/register' element=<UserState><Register /></UserState> />
+          <Route path='/user/response' element=<UserState><ResponseUser/></UserState> />
           <Route path='*' element=<NotFound /> />
 
           {/* Routes for admins */}

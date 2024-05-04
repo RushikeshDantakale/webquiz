@@ -4,7 +4,8 @@ import { convertSecondsToHoursAndMinutes } from '../helper/time';
 import { Modal, Button } from 'react-bootstrap'; // Import modal components from react-bootstrap
 
 export default function Timer() {
-  const state = useContext(userContext).state;
+  const {state , update} = useContext(userContext);
+  console.log(state.timeOver , 8);
   const endTime = state.topic_info[0]?.time || 0;
   const { hr, min } = convertSecondsToHoursAndMinutes(endTime);
   const [time, setTime] = useState({
@@ -17,7 +18,7 @@ export default function Timer() {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setTime(prevState => {
+     state.timeOver=== true ? null :  setTime(prevState => {
         let newSec = prevState.sec - 1;
         let newMin = prevState.min;
         let newHr = prevState.hr;
@@ -34,6 +35,7 @@ export default function Timer() {
 
         // Display modal when time is up
         if (newSec === 0 && newMin === 0 && newHr === 0) {
+          update("timeOver" , true)
           setShowModal(true);
           clearInterval(intervalId); // Stop the timer
         }
@@ -47,7 +49,7 @@ export default function Timer() {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [state.timeOver]);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -61,6 +63,7 @@ export default function Timer() {
   const submitFunction = () => {
     // Your submit logic here
     console.log("Submit function called");
+    update("timeOver" , true)
   };
 
   return (<>

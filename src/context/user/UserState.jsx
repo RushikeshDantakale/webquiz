@@ -5,7 +5,8 @@ const UserState = (props) =>{
         topic_info:null,
         questions:null,
         agreedToTerms:false,
-        timeOver:false
+        timeOver:false,
+        user:{}
     });
 
     const update =(name, value )=> setState(prevState => ({

@@ -2,16 +2,25 @@ import React, { useContext, useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import userContext from '../context/user/UserContext';
 import { Modal, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+
 
 export default function Quiz() {
     const [givenAnswers, setGivenAnswers] = useState([]);
     const [index, setIndex] = useState(0);
     const { questions } = useContext(userContext).state;
+    const {state , update } = useContext(userContext);
+    const {user} = state;
+
+    console.log(state , 13);
 
     const [showModal, setShowModal] = useState(true); // State to manage modal visibility
     const [agreedToTerms, setAgreedToTerms] = useState(false); // State to track agreement to terms
     const [timerStarted, setTimerStarted] = useState(false); // State to track if timer has started
-
+    
+    const navigate = useNavigate()
+    
     // Effect to start timer when terms are agreed upon
     useEffect(() => {
         if (agreedToTerms) {
@@ -34,28 +43,70 @@ export default function Quiz() {
                 checkbox.checked = selectedAnswers.includes(i);
             });
         }
-    }, [index]);
+    }, [index, givenAnswers]);
 
     const back = (e) => {
         e.preventDefault();
         if (index === 0) {
             return alert("This is the first Question!");
         }
+        setGivenAnswers(prevAnswers => {
+            const updatedAnswers = [...prevAnswers];
+            const selectedAnswers = Array.from({ length: questions[index].choices.length }, (_, i) => {
+                const checkbox = document.getElementById(`flexCheckIndeterminate-${index}-${i}`);
+                return checkbox.checked ? i : null;
+            });
+            updatedAnswers[index] = selectedAnswers.filter(answer => answer !== null); // Filter out unchecked checkboxes
+            return updatedAnswers;
+        });
         setIndex(prevIndex => prevIndex - 1);
     };
 
-    const submit = (e) => {
+    const submit = async (e) => {
         if (e !== undefined) e.preventDefault();
-        alert("inside submit")
-        // Handle submission logic here
-        //give alert if user really want to submit
+        if ( confirm("Do you really want to submit this quiz??")){
+            update("timeOver" , true)
+                // Save the current answer before submitting
+                const selectedAnswers = Array.from({ length: questions[index].choices.length }, (_, i) => {
+                    const checkbox = document.getElementById(`flexCheckIndeterminate-${index}-${i}`);
+                    return checkbox.checked ? i : null;
+                });
+                console.log("inside sb1");
+                setGivenAnswers(prevAnswers => {
+                    const updatedAnswers = [...prevAnswers];
+                    updatedAnswers[index] = selectedAnswers.filter(answer => answer !== null); // Filter out unchecked checkboxes
+                    return updatedAnswers;
+                });
+                console.log("inside sb2");
 
+        
+                const jsonData = {
+                    givenAnswers: givenAnswers, // Include the current answer
+                    index,
+                    topic_code: user.topic_code,
+                    email: user.email
+                };
+                console.log("inside sb3");
 
-        //give attempted count to user
+        
+                // Handle submission logic here
+                const response = await axios.post(`${import.meta.env.VITE_SERVER}/user/submit_quiz`, jsonData);
+                console.log("inside sb4");
 
-
-        //if time ends , automatically submit the quiz
+                console.log(response, 64);
+                console.log("before navigation");
+                
+                navigate("/user/response"); // Navigate after submission is complete
+                console.log("after navigation");
+        
+        }else{
+            update("timeOver" , false)
+        }
+        
+       
     };
+    
+    
 
     const save = (e) => {
         e.preventDefault();
@@ -91,7 +142,9 @@ export default function Quiz() {
                     By clicking "Agree", you agree to the terms and conditions.
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="danger" onClick={() => setShowModal(false)}>
+                    <Button variant="danger" onClick={() =>{ 
+                        navigate(-1)
+                        setShowModal(false)}}>
                         Close
                     </Button>
                     <Button style={{backgroundColor:"#FFA822"}} variant="primary" onClick={handleAgreeTerms}>

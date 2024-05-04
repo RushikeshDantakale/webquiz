@@ -52,8 +52,9 @@ export default function Register() {
     }
     try {
       const res = await axios.post(`${import.meta.env.VITE_SERVER}/user/register`, selected)
-      const {topic_info , questions} = res.data.data
+      const {topic_info , questions , user} = res.data.data
       update("topic_info",topic_info)
+      update("user" , user)
       update("questions",questions)
       navigate("/user/quiz")
     } catch (error) {
